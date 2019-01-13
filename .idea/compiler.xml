@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="com.github.findcoo.spring-cloud-lab.main" target="1.8" />
+      <module name="com.github.findcoo.spring-cloud-lab.spring-cloud-lab.main" target="1.8" />
+      <module name="com.github.findcoo.spring-cloud-lab.spring-cloud-lab.test" target="1.8" />
       <module name="com.github.findcoo.spring-cloud-lab.test" target="1.8" />
       <module name="spring-cloud-lab.task.main" target="1.8" />
       <module name="spring-cloud-lab.task.test" target="1.8" />

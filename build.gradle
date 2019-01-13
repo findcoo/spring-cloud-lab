@@ -14,8 +14,8 @@ buildscript {
     }
 }
 
-group = 'com.github.findcoo'
-version = '1.0'
+group = 'com.github.findcoo.spring-cloud-lab'
+version = '1.2'
 
 allprojects {
 	repositories {
