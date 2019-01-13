@@ -45,7 +45,7 @@ allprojects {
 	apply plugin: 'kotlin-kapt'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'maven'
+	apply plugin: 'maven'
 
 	task sourcesJar(type: Jar) {
 		from sourceSets.main.allSource
@@ -76,6 +76,8 @@ allprojects {
 	}
 
 	sourceCompatibility = 1.8
+	bootJar.enabled = false
+	jar.enabled = true
 
 	dependencies {
 		compile('com.fasterxml.jackson.module:jackson-module-kotlin')
@@ -93,8 +95,6 @@ allprojects {
 }
 
 subprojects {
-	bootJar.enabled = false
-	jar.enabled = true
 }
 
 project(":task") {
