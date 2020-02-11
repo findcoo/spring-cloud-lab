@@ -1,3 +1,4 @@
 rootProject.name = "spring-cloud-lab"
 
 include 'task'
+include 'task:simple-task'
