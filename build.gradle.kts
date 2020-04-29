@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URI
 
 
 plugins {
@@ -9,7 +10,7 @@ plugins {
 }
 
 group = "com.github.findcoo.spring-cloud-lab"
-version = "1.2"
+version = "1.3"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 extra["springCloudVersion"] = "Hoxton.SR4"
@@ -17,6 +18,7 @@ extra["springCloudVersion"] = "Hoxton.SR4"
 allprojects {
   repositories {
     mavenCentral()
+    maven { url = URI("https://jitpack.io") }
   }
 }
 
