@@ -4,6 +4,7 @@ import java.net.URI
 
 
 plugins {
+  id("maven")
   id("org.springframework.boot") version "2.2.6.RELEASE"
   id("io.spring.dependency-management") version "1.0.9.RELEASE"
   id("com.palantir.docker") version "0.25.0"
