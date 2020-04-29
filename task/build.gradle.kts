@@ -8,16 +8,15 @@ subprojects {
     testImplementation("org.springframework.batch:spring-batch-test")
   }
 
-
-  tasks.bootJar {
-    enabled = true
-  }
-
-  tasks.jar {
+  tasks.getByName<Jar>("jar"){
     enabled = false
   }
 
-  val bootJar: BootJar by tasks
+  tasks.getByName<BootJar>("bootJar"){
+    enabled = true
+  }
+
+  val bootJar = tasks.getByName<BootJar>("bootJar")
 
   docker {
     val dockerRegistry: String by rootProject.extra
@@ -35,4 +34,12 @@ val dockerPublish: Task by tasks.creating {
     dependsOn(tasks.dockerPush)
     dependsOn(tasks.dockerTagsPush)
   }
+}
+
+tasks.getByName<Jar>("jar"){
+  enabled = true
+}
+
+tasks.getByName<BootJar>("bootJar"){
+  enabled = false
 }

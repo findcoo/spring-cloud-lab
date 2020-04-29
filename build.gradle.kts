@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 import java.net.URI
 
 
@@ -26,7 +27,7 @@ allprojects {
 subprojects {
   apply(plugin = "kotlin")
 	apply(plugin = "kotlin-spring")
-	apply(plugin = "org.springframework.boot")
+  apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
   apply(plugin = "com.palantir.docker")
 
@@ -55,15 +56,8 @@ subprojects {
       jvmTarget = "1.8"
     }
   }
-
-  tasks.bootJar {
-    enabled = false
-  }
-
-  tasks.jar {
-    enabled = true
-  }
-
 }
 
-
+tasks.getByName<BootJar>("bootJar") {
+  enabled = false
+}
