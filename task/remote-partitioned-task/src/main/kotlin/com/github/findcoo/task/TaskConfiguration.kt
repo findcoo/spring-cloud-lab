@@ -41,7 +41,7 @@ class TaskConfiguration(
   @Bean
   fun partitionHandler(taskLauncher: TaskLauncher, jobExplorer: JobExplorer): PartitionHandler {
     val resource = resourceLoader.getResource("docker://findcoo/remote-partitioned-task")
-    val partitionHandler: DeployerPartitionHandler = DeployerPartitionHandler(taskLauncher, jobExplorer, resource, "workerStep", taskRepository)
+    val partitionHandler = DeployerPartitionHandler(taskLauncher, jobExplorer, resource, "workerStep", taskRepository)
     val commandLineArgs = arrayListOf<String>()
 
     commandLineArgs.add("--spring.profiles.active=worker")
@@ -96,7 +96,7 @@ class TaskConfiguration(
   @Bean
   @StepScope
   fun workerTasklet(
-    @Value("#{stepExecutionContext['partitionNumber']}") partitionNumber: Int?): Tasklet? {
+    @Value("#{stepExecutionContext['partitionNumber']}") partitionNumber: Int?): Tasklet {
     return Tasklet { contribution, chunkContext ->
       println("This tasklet ran partition: $partitionNumber")
       RepeatStatus.FINISHED
