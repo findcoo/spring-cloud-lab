@@ -26,6 +26,7 @@ allprojects {
 }
 
 subprojects {
+  apply(plugin = "maven")
   apply(plugin = "kotlin")
 	apply(plugin = "kotlin-spring")
   apply(plugin = "org.springframework.boot")
