@@ -5,6 +5,7 @@ import java.net.URI
 plugins {
   id("org.springframework.boot") version "2.2.6.RELEASE"
   id("io.spring.dependency-management") version "1.0.9.RELEASE"
+  id("com.palantir.docker") version "0.25.0"
   kotlin("jvm") version "1.3.71"
   kotlin("plugin.spring") version "1.3.71"
 }
@@ -27,6 +28,7 @@ subprojects {
 	apply(plugin = "kotlin-spring")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
+  apply(plugin = "com.palantir.docker")
 
   dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
