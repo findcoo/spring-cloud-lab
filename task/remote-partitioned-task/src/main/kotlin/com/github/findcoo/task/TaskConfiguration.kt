@@ -97,7 +97,7 @@ class TaskConfiguration(
   @StepScope
   fun workerTasklet(
     @Value("#{stepExecutionContext['partitionNumber']}") partitionNumber: Int?): Tasklet {
-    return Tasklet { contribution, chunkContext ->
+    return Tasklet { _, _ ->
       println("This tasklet ran partition: $partitionNumber")
       RepeatStatus.FINISHED
     }
