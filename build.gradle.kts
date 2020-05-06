@@ -5,6 +5,7 @@ import java.net.URI
 
 plugins {
   id("maven-publish")
+  id("java-library")
   id("org.springframework.boot") version "2.2.6.RELEASE"
   id("io.spring.dependency-management") version "1.0.9.RELEASE"
   id("com.palantir.docker") version "0.25.0"
@@ -27,6 +28,7 @@ allprojects {
 
 subprojects {
   apply(plugin = "maven-publish")
+  apply(plugin = "java-library")
   apply(plugin = "kotlin")
 	apply(plugin = "kotlin-spring")
   apply(plugin = "org.springframework.boot")
