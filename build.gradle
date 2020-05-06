@@ -29,7 +29,6 @@ subprojects {
 	apply plugin: "kotlin-spring"
   apply plugin: "org.springframework.boot"
 	apply plugin: "io.spring.dependency-management"
-  apply plugin: "com.palantir.docker"
 
   dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -42,7 +41,7 @@ subprojects {
 
   dependencyManagement {
     imports {
-      mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+      mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
   }
 
@@ -55,11 +54,6 @@ subprojects {
   task javadocJar(type: Jar) {
     from javadoc
     archiveClassifier.set("javadoc")
-  }
-
-  artifacts {
-    archives sourcesJar
-    archives javadocJar
   }
 
   test {

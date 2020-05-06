@@ -4,6 +4,8 @@ dependencies {
 }
 
 subprojects {
+  apply plugin: "com.palantir.docker"
+
   dependencies {
     implementation(project(":task"))
 
@@ -24,9 +26,9 @@ subprojects {
 
 task dockerPublish {
   subprojects {
-    dependsOn(docker)
-    dependsOn(dockerPush)
-    dependsOn(dockerTagsPush)
+    dependsOn(tasks.docker)
+    dependsOn(tasks.dockerPush)
+    dependsOn(tasks.dockerTagsPush)
   }
 }
 
