@@ -4,7 +4,7 @@ import java.net.URI
 
 
 plugins {
-  id("maven")
+  id("maven-publish")
   id("org.springframework.boot") version "2.2.6.RELEASE"
   id("io.spring.dependency-management") version "1.0.9.RELEASE"
   id("com.palantir.docker") version "0.25.0"
@@ -20,14 +20,13 @@ extra["springCloudVersion"] = "Hoxton.SR4"
 
 allprojects {
   repositories {
-    mavenCentral()
-    maven { url = URI("https://repo.spring.io/milestone") }
-    maven { url = URI("https://maven.oracle.com") }
+    jcenter()
     maven { url = URI("https://jitpack.io") }
   }
 }
 
 subprojects {
+  apply(plugin = "maven-publish")
   apply(plugin = "kotlin")
 	apply(plugin = "kotlin-spring")
   apply(plugin = "org.springframework.boot")
@@ -59,6 +58,11 @@ subprojects {
     archiveClassifier.set("javadoc")
   }
 
+  artifacts {
+    archives(tasks.getByName("sourcesJar"))
+    archives(tasks.getByName("javadocJar"))
+  }
+
   tasks.withType<Test> {
     useJUnitPlatform()
   }
@@ -69,6 +73,10 @@ subprojects {
       jvmTarget = "1.8"
     }
   }
+}
+
+tasks.getByName<Jar>("jar"){
+  enabled = true
 }
 
 tasks.getByName<BootJar>("bootJar") {

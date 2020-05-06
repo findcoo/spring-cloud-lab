@@ -1,0 +1,1 @@
+/Users/coo.find/Srcs/spring-cloud-lab/task/build/classes/kotlin/main/com/github/findcoo/task/TaskApplication.class:/Users/coo.find/Srcs/spring-cloud-lab/task/build/classes/kotlin/main/com/github/findcoo/task/TaskApplicationKt.class

@@ -1,9 +1,13 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
+dependencies {
+  api("org.springframework.boot:spring-boot-starter-batch")
+  api("org.springframework.cloud:spring-cloud-starter-task")
+}
+
 subprojects {
   dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-batch")
-    implementation("org.springframework.cloud:spring-cloud-starter-task")
+    implementation(project(":task"))
 
     testImplementation("org.springframework.batch:spring-batch-test")
   }
@@ -37,9 +41,9 @@ val dockerPublish: Task by tasks.creating {
 }
 
 tasks.getByName<Jar>("jar"){
-  enabled = true
+  enabled = false
 }
 
 tasks.getByName<BootJar>("bootJar"){
-  enabled = false
+  enabled = true
 }
