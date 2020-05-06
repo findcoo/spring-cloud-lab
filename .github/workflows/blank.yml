@@ -24,5 +24,6 @@ jobs:
 
     - name: Docker publish
       run: |
+        docker login docker.io
         ./gradlew build
         ./gradlew task:dockerPublish
