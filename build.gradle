@@ -47,13 +47,13 @@ subprojects {
 
   task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    archiveClassifier = "sources"
+    archiveClassifier.set("sources")
 
   }
 
   task javadocJar(type: Jar) {
     from javadoc
-    archiveClassifier = "javadoc"
+    archiveClassifier.set("javadoc")
   }
 
   test {
