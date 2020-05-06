@@ -21,12 +21,13 @@ extra["springCloudVersion"] = "Hoxton.SR4"
 allprojects {
   repositories {
     mavenCentral()
+    maven { url = URI("https://repo.spring.io/milestone") }
+    maven { url = URI("https://maven.oracle.com") }
     maven { url = URI("https://jitpack.io") }
   }
 }
 
 subprojects {
-  apply(plugin = "maven")
   apply(plugin = "kotlin")
 	apply(plugin = "kotlin-spring")
   apply(plugin = "org.springframework.boot")
@@ -46,6 +47,16 @@ subprojects {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
+  }
+
+  tasks.register<Jar>("sourcesJar") {
+    from(sourceSets.main.get().allSource)
+    archiveClassifier.set("sources")
+  }
+
+  tasks.register<Jar>("javadocJar") {
+    from(tasks.javadoc)
+    archiveClassifier.set("javadoc")
   }
 
   tasks.withType<Test> {
