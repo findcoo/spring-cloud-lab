@@ -15,6 +15,10 @@ subprojects {
   jar.enabled = false
   bootJar.enabled = true
 
+  install {
+    dependsOn(tasks.bootJar)
+  }
+
   docker {
     name = "findcoo/${project.name}:${version}"
     tag("latest", "findcoo/${project.name}:latest")
