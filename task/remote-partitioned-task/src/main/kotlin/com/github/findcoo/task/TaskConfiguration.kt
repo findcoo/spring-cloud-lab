@@ -6,6 +6,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepScope
 import org.springframework.batch.core.explore.JobExplorer
+import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.batch.core.partition.PartitionHandler
 import org.springframework.batch.core.partition.support.Partitioner
 import org.springframework.batch.core.step.tasklet.Tasklet
@@ -60,6 +61,7 @@ class TaskConfiguration(
   @Profile("!worker")
   fun partitionedJob(partitionHandler: PartitionHandler): Job {
     return jobBuilderFactory.get("partitionedJob")
+      .incrementer(RunIdIncrementer())
       .start(step1(partitionHandler))
       .build()
   }
