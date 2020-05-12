@@ -9,6 +9,7 @@ import org.springframework.batch.core.explore.JobExplorer
 import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.batch.core.partition.PartitionHandler
 import org.springframework.batch.core.partition.support.Partitioner
+import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.tasklet.Tasklet
 import org.springframework.batch.item.ExecutionContext
 import org.springframework.batch.repeat.RepeatStatus
@@ -16,9 +17,11 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.deployer.resource.support.DelegatingResourceLoader
 import org.springframework.cloud.deployer.spi.task.TaskLauncher
 import org.springframework.cloud.task.batch.partition.DeployerPartitionHandler
+import org.springframework.cloud.task.batch.partition.DeployerStepExecutionHandler
 import org.springframework.cloud.task.batch.partition.PassThroughCommandLineArgsProvider
 import org.springframework.cloud.task.batch.partition.SimpleEnvironmentVariablesProvider
 import org.springframework.cloud.task.repository.TaskRepository
+import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
@@ -31,6 +34,8 @@ class TaskConfiguration(
   private val jobBuilderFactory: JobBuilderFactory,
   private val stepBuilderFactory: StepBuilderFactory,
   private val resourceLoader: DelegatingResourceLoader,
+  private val context: ConfigurableApplicationContext,
+  private val jobRepository: JobRepository,
   private val taskRepository: TaskRepository,
   private val environment: Environment
 ) {
@@ -47,7 +52,7 @@ class TaskConfiguration(
 
     commandLineArgs.add("--spring.profiles.active=worker")
     commandLineArgs.add("--spring.cloud.task.initialize.enable=false")
-    commandLineArgs.add("--spring.batch.initializer..enable=false")
+    commandLineArgs.add("--spring.batch.initializer.enabled=false")
 
     partitionHandler.setCommandLineArgsProvider(PassThroughCommandLineArgsProvider(commandLineArgs))
     partitionHandler.setEnvironmentVariablesProvider(SimpleEnvironmentVariablesProvider(environment))
@@ -86,6 +91,12 @@ class TaskConfiguration(
       }
       partitions
     }
+  }
+
+  @Bean
+  @Profile("worker")
+  fun stepExecutionHandler(jobExplorer: JobExplorer?): DeployerStepExecutionHandler? {
+    return DeployerStepExecutionHandler(context, jobExplorer, jobRepository)
   }
 
   @Bean
