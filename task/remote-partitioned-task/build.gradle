@@ -1,4 +1,4 @@
 dependencies {
   implementation("org.springframework.batch:spring-batch-integration")
-  implementation("org.springframework.cloud:spring-cloud-deployer-kubernetes:2.3.2.RELEASE")
+  implementation("org.springframework.cloud:spring-cloud-deployer-kubernetes:2.1.1.RELEASE")
 }
