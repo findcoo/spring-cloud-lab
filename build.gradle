@@ -10,7 +10,7 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 ext {
-  set("springCloudVersion", "Hoxton.SR4")
+  set("springCloudVersion", "Hoxton.SR6")
 }
 
 allprojects {
@@ -20,7 +20,7 @@ allprojects {
   }
 
   group = "com.github.findcoo.spring-cloud-lab"
-  version = "1.15"
+  version = "1.16"
 }
 
 subprojects {

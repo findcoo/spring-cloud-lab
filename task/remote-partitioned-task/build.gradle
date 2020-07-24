@@ -1,5 +1,4 @@
 dependencies {
   implementation("org.springframework.batch:spring-batch-integration")
   implementation("org.springframework.cloud:spring-cloud-deployer-kubernetes:2.0.3.RELEASE")
-  implementation("io.fabric8:kubernetes-client:4.1.0")
 }
